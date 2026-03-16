@@ -1,0 +1,1428 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Wallpa Grill – Parrillas & Pollo</title>
+<link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>🔥</text></svg>">
+<link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Oswald:wght@400;600;700&family=Roboto:wght@300;400;500&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --black: #0a0a0a;
+    --dark: #111111;
+    --card: #1a1a1a;
+    --card2: #222222;
+    --red: #e01c1c;
+    --red-dark: #b81414;
+    --yellow: #f5c518;
+    --yellow-dark: #d4a800;
+    --white: #f0f0f0;
+    --gray: #888;
+    --border: rgba(245,197,24,0.15);
+    --whatsapp: #25D366;
+  }
+
+  * { box-sizing: border-box; margin: 0; padding: 0;-webkit-tap-highlight-color: transparent;
+  outline: none; }
+
+  html { scroll-behavior: smooth; }
+
+  body {
+    background: var(--black);
+    color: var(--white);
+    font-family: 'Roboto', sans-serif;
+    font-weight: 300;
+    overflow-x: hidden;
+  }
+
+  /* ── NOISE TEXTURE OVERLAY ── */
+  body::before {
+    content: '';
+    position: fixed;
+    inset: 0;
+    background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noise'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noise)' opacity='0.03'/%3E%3C/svg%3E");
+    pointer-events: none;
+    z-index: 0;
+    opacity: .4;
+  }
+
+  /* ── HEADER ── */
+  header {
+    position: sticky;
+    top: 0;
+    z-index: 100;
+    background: rgba(10,10,10,0.95);
+    backdrop-filter: blur(12px);
+    border-bottom: 2px solid var(--yellow);
+    padding: 0 20px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    height: 64px;
+  }
+
+  .logo {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    text-decoration: none;
+  }
+
+  .logo-icon {
+    width: 42px;
+    height: 42px;
+    background: var(--yellow);
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 22px;
+    box-shadow: 0 0 16px rgba(245,197,24,0.5);
+    animation: pulse-logo 3s ease-in-out infinite;
+  }
+
+  @keyframes pulse-logo {
+    0%,100% { box-shadow: 0 0 16px rgba(245,197,24,0.5); }
+    50% { box-shadow: 0 0 28px rgba(245,197,24,0.9); }
+  }
+
+  .logo-text {
+    display: flex;
+    flex-direction: column;
+    line-height: 1;
+  }
+
+  .logo-text span:first-child {
+    font-family: 'Bebas Neue', sans-serif;
+    font-size: 22px;
+    color: var(--yellow);
+    letter-spacing: 3px;
+  }
+
+  .logo-text span:last-child {
+    font-family: 'Bebas Neue', sans-serif;
+    font-size: 13px;
+    color: var(--red);
+    letter-spacing: 4px;
+  }
+
+  .header-cart {
+    position: relative;
+    background: var(--red);
+    border: none;
+    border-radius: 50px;
+    padding: 8px 18px;
+    color: #fff;
+    font-family: 'Oswald', sans-serif;
+    font-size: 14px;
+    font-weight: 600;
+    cursor: pointer;
+    letter-spacing: 1px;
+    transition: transform .15s, background .15s;
+    display: flex;
+    align-items: center;
+    gap: 6px;
+  }
+
+  .header-cart:hover { background: var(--red-dark); transform: scale(1.04); }
+
+  .cart-badge {
+    background: var(--yellow);
+    color: var(--black);
+    border-radius: 50%;
+    width: 20px;
+    height: 20px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 11px;
+    font-weight: 700;
+    font-family: 'Roboto', sans-serif;
+  }
+
+  /* ── HERO ── */
+  .hero {
+    position: relative;
+    text-align: center;
+    padding: 60px 20px 50px;
+    overflow: hidden;
+    background: linear-gradient(180deg, #1a0000 0%, var(--black) 100%);
+  }
+
+  .hero::after {
+    content: '';
+    position: absolute;
+    bottom: 0;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 80%;
+    height: 1px;
+    background: linear-gradient(90deg, transparent, var(--yellow), transparent);
+  }
+
+  .hero-flames {
+    font-size: clamp(48px, 12vw, 80px);
+    display: block;
+    animation: flicker 1.8s ease-in-out infinite alternate;
+    filter: drop-shadow(0 0 20px #ff6600);
+  }
+
+  @keyframes flicker {
+    0% { transform: scaleY(1) scaleX(1); filter: drop-shadow(0 0 20px #ff6600); }
+    33% { transform: scaleY(1.04) scaleX(.98); }
+    66% { transform: scaleY(.97) scaleX(1.02); filter: drop-shadow(0 0 30px #ff4400); }
+    100% { transform: scaleY(1.06) scaleX(1); filter: drop-shadow(0 0 25px #ff8800); }
+  }
+
+  .hero h1 {
+    font-family: 'Bebas Neue', sans-serif;
+    font-size: clamp(52px, 14vw, 100px);
+    letter-spacing: 6px;
+    line-height: .9;
+    margin-top: 10px;
+  }
+
+  .hero h1 span.y { color: var(--yellow); }
+  .hero h1 span.r { color: var(--red); }
+
+  .hero-sub {
+    font-family: 'Oswald', sans-serif;
+    font-size: clamp(14px, 3.5vw, 18px);
+    color: var(--gray);
+    letter-spacing: 4px;
+    text-transform: uppercase;
+    margin-top: 12px;
+  }
+
+  .hero-badges {
+    display: flex;
+    gap: 10px;
+    justify-content: center;
+    flex-wrap: wrap;
+    margin-top: 24px;
+  }
+
+  .badge {
+    background: rgba(245,197,24,0.08);
+    border: 1px solid rgba(245,197,24,0.3);
+    border-radius: 50px;
+    padding: 6px 16px;
+    font-size: 12px;
+    color: var(--yellow);
+    font-family: 'Oswald', sans-serif;
+    letter-spacing: 1.5px;
+  }
+
+  /* ── DELIVERY NOTICE ── */
+  .delivery-notice {
+    background: linear-gradient(90deg, rgba(224,28,28,0.12), rgba(245,197,24,0.12));
+    border-top: 1px solid rgba(224,28,28,0.3);
+    border-bottom: 1px solid rgba(245,197,24,0.3);
+    padding: 12px 20px;
+    text-align: center;
+    font-family: 'Oswald', sans-serif;
+    font-size: 13px;
+    letter-spacing: 1px;
+    color: var(--white);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 8px;
+    flex-wrap: wrap;
+  }
+
+  .delivery-notice strong { color: var(--yellow); }
+
+  /* ── PAYMENT BAR ── */
+  .payment-bar {
+    background: var(--dark);
+    padding: 10px 20px;
+    text-align: center;
+    font-size: 12px;
+    color: var(--gray);
+    font-family: 'Oswald', sans-serif;
+    letter-spacing: 1.5px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 14px;
+    flex-wrap: wrap;
+  }
+
+  .pay-method {
+    display: flex;
+    align-items: center;
+    gap: 5px;
+    color: var(--white);
+    font-size: 13px;
+  }
+
+  .pay-icon {
+    width: 28px;
+    height: 28px;
+    border-radius: 8px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 15px;
+  }
+
+  .pay-yape { background: #6c2fa7; }
+  .pay-cash { background: #1a7a2e; }
+
+  /* ── NAV TABS ── */
+  .nav-tabs {
+    position: sticky;
+    top: 64px;
+    z-index: 90;
+    background: rgba(17,17,17,0.97);
+    backdrop-filter: blur(8px);
+    padding: 0 16px;
+    display: flex;
+    gap: 0;
+    overflow-x: auto;
+    border-bottom: 2px solid var(--border);
+    scrollbar-width: none;
+    -webkit-tap-highlight-color: transparent;
+    outline: none;
+  }
+
+  .nav-tabs::-webkit-scrollbar { display: none; }
+
+  .nav-tab {
+    flex-shrink: 0;
+    background: none;
+    border: none;
+    border-bottom: 3px solid transparent;
+    padding: 14px 18px;
+    color: var(--gray);
+    font-family: 'Oswald', sans-serif;
+    font-size: 13px;
+    font-weight: 600;
+    letter-spacing: 1.5px;
+    text-transform: uppercase;
+    cursor: pointer;
+    transition: color .2s, border-color .2s;
+    white-space: nowrap;
+    margin-bottom: -2px;
+  }
+
+  .nav-tab.active, .nav-tab:hover {
+    color: var(--yellow);
+    border-bottom-color: var(--yellow);
+  }
+
+  /* ── MAIN CONTENT ── */
+  main {
+    max-width: 1100px;
+    margin: 0 auto;
+    padding: 30px 14px 120px;
+  }
+
+  /* ── SECTION ── */
+  .section { margin-bottom: 50px; }
+
+  .section-header {
+    display: flex;
+    align-items: center;
+    gap: 14px;
+    margin-bottom: 20px;
+    padding-bottom: 12px;
+    border-bottom: 1px solid var(--border);
+  }
+
+  .section-icon { font-size: 28px; }
+
+  .section-title {
+    font-family: 'Bebas Neue', sans-serif;
+    font-size: clamp(26px, 6vw, 38px);
+    letter-spacing: 3px;
+    line-height: 1;
+  }
+
+  .section-title.one-word { color: var(--yellow); }
+  .section-title .t-yellow { color: var(--yellow); }
+  .section-title .t-red { color: var(--red); }
+
+  .section-desc {
+    color: var(--gray);
+    font-size: 12px;
+    font-family: 'Oswald', sans-serif;
+    letter-spacing: 1px;
+    margin-top: 3px;
+  }
+
+  /* ── CARDS GRID ── */
+  .cards-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+    gap: 14px;
+  }
+
+  .card {
+    background: var(--card);
+    border: 1px solid var(--border);
+    border-radius: 14px;
+    padding: 18px;
+    cursor: pointer;
+    transition: transform .2s, border-color .2s, box-shadow .2s;
+    position: relative;
+    overflow: hidden;
+    -webkit-tap-highlight-color: transparent;
+    outline: none;
+  }
+
+  .card::before {
+    content: '';
+    position: absolute;
+    top: 0; left: 0; right: 0;
+    height: 2px;
+    background: linear-gradient(90deg, var(--red), var(--yellow));
+    opacity: 0;
+    transition: opacity .2s;
+  }
+
+  .card:hover {
+    transform: translateY(-3px);
+    border-color: rgba(245,197,24,0.4);
+    box-shadow: 0 8px 30px rgba(0,0,0,0.4);
+  }
+
+  .card:hover::before { opacity: 1; }
+
+  .card-top {
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-start;
+    gap: 10px;
+  }
+
+  .card-name {
+    font-family: 'Oswald', sans-serif;
+    font-size: 15px;
+    font-weight: 600;
+    color: var(--white);
+    line-height: 1.3;
+    flex: 1;
+  }
+
+  .card-price {
+    font-family: 'Bebas Neue', sans-serif;
+    font-size: 22px;
+    color: var(--red);
+    letter-spacing: 1px;
+    white-space: nowrap;
+  }
+
+  .card-price span {
+    font-family: 'Oswald', sans-serif;
+    font-size: 12px;
+    font-weight: 400;
+    color: var(--gray);
+  }
+
+  .card-desc {
+    margin-top: 8px;
+    font-size: 12px;
+    color: var(--gray);
+    line-height: 1.5;
+  }
+
+  .card-tags {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 5px;
+    margin-top: 10px;
+  }
+
+  .tag {
+    background: rgba(245,197,24,0.08);
+    border: 1px solid rgba(245,197,24,0.2);
+    border-radius: 4px;
+    padding: 2px 7px;
+    font-size: 10px;
+    color: var(--yellow);
+    font-family: 'Oswald', sans-serif;
+    letter-spacing: .5px;
+  }
+
+  .tag.red {
+    background: rgba(224,28,28,0.1);
+    border-color: rgba(224,28,28,0.25);
+    color: #ff8080;
+  }
+
+  .card-taper {
+    font-size: 11px;
+    color: #555;
+    margin-top: 8px;
+    font-family: 'Oswald', sans-serif;
+    letter-spacing: .5px;
+  }
+
+  .card-btn {
+    margin-top: 14px;
+    width: 100%;
+    background: linear-gradient(135deg, var(--red), #c01010);
+    border: none;
+    border-radius: 8px;
+    padding: 10px;
+    color: #fff;
+    font-family: 'Oswald', sans-serif;
+    font-size: 13px;
+    font-weight: 600;
+    letter-spacing: 2px;
+    cursor: pointer;
+    transition: opacity .15s, transform .15s;
+    text-transform: uppercase;
+    -webkit-tap-highlight-color: transparent;
+    outline: none;
+  }
+
+  .card-btn:hover { opacity: .9; transform: scale(1.02); }
+
+  .card-btn.added {
+    background: linear-gradient(135deg, #1a7a2e, #0f5a20);
+  }
+
+  /* ── FLAVORS (Alitas) ── */
+  .flavor-group {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 6px;
+    margin-top: 10px;
+  }
+
+  .flavor-btn {
+    background: var(--card2);
+    border: 1px solid #333;
+    border-radius: 6px;
+    padding: 4px 10px;
+    font-size: 11px;
+    color: var(--gray);
+    font-family: 'Oswald', sans-serif;
+    cursor: pointer;
+    transition: all .15s;
+  }
+
+  .flavor-btn.selected {
+    background: rgba(245,197,24,0.15);
+    border-color: var(--yellow);
+    color: var(--yellow);
+  }
+
+  /* ── COMBO HIGHLIGHT ── */
+  .card.combo {
+    border-color: rgba(224,28,28,0.3);
+    background: linear-gradient(135deg, #1a0a0a, #1a1a1a);
+  }
+
+  .combo-badge {
+    position: absolute;
+    top: 12px;
+    right: 12px;
+    background: var(--red);
+    color: #fff;
+    font-family: 'Bebas Neue', sans-serif;
+    font-size: 10px;
+    letter-spacing: 1.5px;
+    padding: 3px 8px;
+    border-radius: 4px;
+  }
+
+  /* ── CART PANEL ── */
+  .cart-overlay {
+    display: none;
+    position: fixed;
+    inset: 0;
+    background: rgba(0,0,0,0.7);
+    backdrop-filter: blur(4px);
+    z-index: 200;
+  }
+
+  .cart-overlay.open { display: block; }
+
+  .cart-panel {
+    position: fixed;
+    right: 0;
+    top: 0;
+    bottom: 0;
+    width: min(400px, 100vw);
+    background: var(--dark);
+    border-left: 1px solid var(--border);
+    z-index: 201;
+    display: flex;
+    flex-direction: column;
+    transform: translateX(100%);
+    transition: transform .3s cubic-bezier(.4,0,.2,1);
+  }
+
+  .cart-panel.open { transform: translateX(0); }
+
+  .cart-head {
+    padding: 20px;
+    border-bottom: 1px solid var(--border);
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+  }
+
+  .cart-title {
+    font-family: 'Bebas Neue', sans-serif;
+    font-size: 26px;
+    letter-spacing: 3px;
+    color: var(--yellow);
+  }
+
+  .cart-close {
+    background: none;
+    border: 1px solid #333;
+    border-radius: 50%;
+    width: 36px;
+    height: 36px;
+    color: var(--white);
+    font-size: 18px;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transition: border-color .15s, color .15s;
+    -webkit-tap-highlight-color: transparent;
+    outline: none;
+  }
+
+  .cart-close:hover { border-color: var(--red); color: var(--red); }
+
+  .cart-items {
+    flex: 1;
+    overflow-y: auto;
+    padding: 16px 20px;
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+    scrollbar-width: thin;
+    scrollbar-color: #333 transparent;
+  }
+
+  .cart-empty {
+    text-align: center;
+    padding: 40px 20px;
+    color: var(--gray);
+  }
+
+  .cart-empty .empty-icon { font-size: 48px; display: block; margin-bottom: 10px; }
+
+  .cart-item {
+    background: var(--card);
+    border: 1px solid var(--border);
+    border-radius: 10px;
+    padding: 12px 14px;
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-start;
+    gap: 10px;
+    animation: slideIn .2s ease;
+  }
+
+  @keyframes slideIn {
+    from { opacity: 0; transform: translateX(20px); }
+    to { opacity: 1; transform: translateX(0); }
+  }
+
+  .ci-info { flex: 1; }
+
+  .ci-name {
+    font-family: 'Oswald', sans-serif;
+    font-size: 13px;
+    font-weight: 600;
+    color: var(--white);
+    line-height: 1.3;
+  }
+
+  .ci-flavor {
+    font-size: 11px;
+    color: var(--yellow);
+    margin-top: 2px;
+  }
+
+  .ci-price {
+    font-family: 'Bebas Neue', sans-serif;
+    font-size: 18px;
+    color: var(--red);
+  }
+
+  .ci-remove {
+    background: none;
+    border: none;
+    color: #555;
+    font-size: 18px;
+    cursor: pointer;
+    padding: 0 2px;
+    transition: color .15s;
+    line-height: 1;
+  }
+
+  .ci-remove:hover { color: var(--red); }
+
+  .cart-foot {
+    padding: 20px;
+    border-top: 1px solid var(--border);
+  }
+
+  .cart-total-row {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 6px;
+  }
+
+  .cart-total-label {
+    font-family: 'Oswald', sans-serif;
+    font-size: 13px;
+    letter-spacing: 1.5px;
+    color: var(--gray);
+    text-transform: uppercase;
+  }
+
+  .cart-total-val {
+    font-family: 'Bebas Neue', sans-serif;
+    font-size: 30px;
+    color: var(--yellow);
+    letter-spacing: 2px;
+  }
+
+  .cart-delivery-note {
+    font-size: 11px;
+    color: var(--gray);
+    text-align: center;
+    margin: 10px 0 14px;
+    line-height: 1.5;
+  }
+
+  .cart-delivery-note strong { color: var(--yellow); }
+
+  .whatsapp-btn {
+    width: 100%;
+    background: var(--whatsapp);
+    border: none;
+    border-radius: 12px;
+    padding: 16px;
+    color: #fff;
+    font-family: 'Oswald', sans-serif;
+    font-size: 16px;
+    font-weight: 700;
+    letter-spacing: 2px;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 10px;
+    transition: background .2s, transform .15s;
+    text-transform: uppercase;
+    -webkit-tap-highlight-color: transparent;
+    outline: none;
+  }
+
+  .whatsapp-btn:hover { background: #1da851; transform: scale(1.02); }
+
+  .whatsapp-btn:disabled {
+    background: #333;
+    color: #666;
+    cursor: not-allowed;
+    transform: none;
+  }
+
+  .wa-icon {
+    width: 26px;
+    height: 26px;
+    fill: #fff;
+  }
+
+  /* ── DELIVERY INFO BOX ── */
+  .delivery-box {
+    background: var(--card);
+    border: 1px solid var(--border);
+    border-radius: 12px;
+    padding: 18px 20px;
+    margin-bottom: 40px;
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+    gap: 14px;
+  }
+
+  .dbox-item {
+    display: flex;
+    align-items: flex-start;
+    gap: 10px;
+  }
+
+  .dbox-icon { font-size: 22px; flex-shrink: 0; }
+
+  .dbox-label {
+    font-family: 'Oswald', sans-serif;
+    font-size: 11px;
+    letter-spacing: 1.5px;
+    color: var(--gray);
+    text-transform: uppercase;
+    margin-bottom: 2px;
+  }
+
+  .dbox-val {
+    font-family: 'Oswald', sans-serif;
+    font-size: 14px;
+    color: var(--yellow);
+    font-weight: 600;
+  }
+
+  /* ── FLOATING CART BUTTON (mobile) ── */
+  .float-cart {
+    display: none;
+    position: fixed;
+    bottom: 20px;
+    right: 20px;
+    z-index: 150;
+    background: var(--red);
+    border: none;
+    border-radius: 60px;
+    padding: 14px 22px;
+    color: #fff;
+    font-family: 'Oswald', sans-serif;
+    font-size: 15px;
+    font-weight: 700;
+    cursor: pointer;
+    letter-spacing: 1px;
+    box-shadow: 0 4px 24px rgba(224,28,28,0.5);
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    transition: transform .15s;
+  }
+
+  .float-cart:hover { transform: scale(1.05); }
+  .float-cart.hidden { display: none !important; }
+
+  /* ── FOOTER ── */
+  footer {
+    background: #080808;
+    border-top: 1px solid var(--border);
+    padding: 30px 20px;
+    text-align: center;
+  }
+
+  .footer-logo {
+    font-family: 'Bebas Neue', sans-serif;
+    font-size: 28px;
+    letter-spacing: 5px;
+  }
+
+  .footer-logo .y { color: var(--yellow); }
+  .footer-logo .r { color: var(--red); }
+
+  footer p {
+    color: #444;
+    font-size: 12px;
+    margin-top: 8px;
+    letter-spacing: 1px;
+  }
+
+  /* ── RESPONSIVE ── */
+  @media (max-width: 600px) {
+    .cards-grid { grid-template-columns: 1fr; }
+    .hero { padding: 40px 16px 36px; }
+    .nav-tab { padding: 12px 14px; font-size: 11px; }
+  }
+
+  @media (min-width: 601px) {
+    .float-cart { bottom: 28px; right: 28px; }
+  }
+
+  /* SCROLL REVEAL */
+  .reveal {
+    opacity: 0;
+    transform: translateY(18px);
+    transition: opacity .5s ease, transform .5s ease;
+  }
+  .reveal.visible {
+    opacity: 1;
+    transform: translateY(0);
+  }
+</style>
+</head>
+<body>
+
+<!-- HEADER -->
+<header>
+  <a class="logo" href="#">
+   <div class="logo-icon">
+        <img src="logo.png" alt="Wallpa Grill" style="width:34px;height:34px;object-fit:contain;border-radius:50%;">
+    </div>
+  </a>
+  <button class="header-cart" onclick="toggleCart()">
+    🛒 Mi Pedido
+    <span class="cart-badge" id="badge">0</span>
+  </button>
+</header>
+
+<!-- HERO -->
+<section class="hero">
+  <img src="logo.png" alt="Wallpa Grill Logo" style="width:clamp(100px,25vw,160px);height:clamp(100px,25vw,160px);object-fit:contain;border-radius:50%;box-shadow:0 0 30px rgba(245,197,24,0.5);animation:pulse-logo 3s ease-in-out infinite;margin-bottom:10px;">
+  <p class="hero-sub">Parrillas · Pollos · Alitas · El Porvenir</p>
+  <div class="hero-badges">
+    <span class="badge">🥩 A la parrilla</span>
+    <span class="badge">🍗 A la brasa</span>
+    <span class="badge">🔥 Alitas</span>
+    <span class="badge">🛵 Delivery El Porvenir</span>
+  </div>
+</section>
+
+<!-- DELIVERY NOTICE -->
+<div class="delivery-notice">
+  🛵 Delivery disponible solo en <strong>Distrito El Porvenir</strong> &nbsp;|&nbsp;
+  💰 Costo según tu distancia al local &nbsp;|&nbsp;
+  📦 Include taper(s) con tu pedido
+</div>
+
+<!-- PAYMENT BAR -->
+<div class="payment-bar">
+  <span style="color:#888;font-size:11px;letter-spacing:2px;">MÉTODOS DE PAGO:</span>
+  <div class="pay-method">
+    <div class="pay-icon pay-yape">
+        <img src="yape.png" alt="Yape" style="width:20px;height:20px;object-fit:contain;border-radius:4px;">
+    </div>
+    <span>Yape</span>
+  </div>
+  <div class="pay-method">
+    <div class="pay-icon pay-cash">💵</div>
+    <span>Efectivo</span>
+  </div>
+</div>
+
+<!-- NAV TABS -->
+<nav class="nav-tabs" id="navTabs">
+  <button class="nav-tab active" onclick="scrollToSection('parrillas-personales',this)">🍗 Parrillas</button>
+  <button class="nav-tab" onclick="scrollToSection('res-parrilla',this)">🥩 Res</button>
+  <button class="nav-tab" onclick="scrollToSection('mixtas',this)">🍖 Mixtas</button>
+  <button class="nav-tab" onclick="scrollToSection('combos-parrilleros',this)">🔥 Combos</button>
+  <button class="nav-tab" onclick="scrollToSection('pollo-brasa',this)">🐔 Brasa</button>
+  <button class="nav-tab" onclick="scrollToSection('combos-brasa',this)">🎯 Combos Brasa</button>
+  <button class="nav-tab" onclick="scrollToSection('alitas',this)">🍗 Alitas</button>
+</nav>
+
+<main>
+
+  <!-- INFO BOX -->
+  <div class="delivery-box reveal">
+    <div class="dbox-item">
+      <span class="dbox-icon">📍</span>
+      <div>
+        <div class="dbox-label">Cobertura de Delivery</div>
+        <div class="dbox-val">Distrito El Porvenir</div>
+      </div>
+    </div>
+    <div class="dbox-item">
+      <span class="dbox-icon">💰</span>
+      <div>
+        <div class="dbox-label">Costo de Delivery</div>
+        <div class="dbox-val">Según distancia al local</div>
+      </div>
+    </div>
+    <div class="dbox-item">
+      <span class="dbox-icon">💳</span>
+      <div>
+        <div class="dbox-label">Pago</div>
+        <div class="dbox-val">Yape / Efectivo</div>
+      </div>
+    </div>
+    <div class="dbox-item">
+      <span class="dbox-icon">📦</span>
+      <div>
+        <div class="dbox-label">Incluye</div>
+        <div class="dbox-val">Papas · Ensalada · Cremas · Taper(s)</div>
+      </div>
+    </div>
+  </div>
+
+  <!-- ══ PARRILLAS PERSONALES ══ -->
+  <section class="section reveal" id="parrillas-personales">
+    <div class="section-header">
+      <span class="section-icon">🍗</span>
+      <div>
+        <div class="section-title"><span class="t-yellow">PARRILLAS</span> <span class="t-red">PERSONALES</span></div>
+        <div class="section-desc">Acompañadas de papas fritas, ensalada y variedad de cremas</div>
+      </div>
+    </div>
+    <div class="cards-grid" id="grid-personal"></div>
+  </section>
+
+  <!-- ══ RES A LA PARRILLA ══ -->
+  <section class="section reveal" id="res-parrilla">
+    <div class="section-header">
+      <span class="section-icon">🥩</span>
+      <div>
+        <div class="section-title"><span class="t-yellow">RES</span> <span class="t-red">A LA PARRILLA</span></div>
+        <div class="section-desc">Acompañadas de papas fritas, ensalada y variedad de cremas</div>
+      </div>
+    </div>
+    <div class="cards-grid" id="grid-res"></div>
+  </section>
+
+  <!-- ══ PARRILLAS MIXTAS ══ -->
+  <section class="section reveal" id="mixtas">
+    <div class="section-header">
+      <span class="section-icon">🍖</span>
+      <div>
+        <div class="section-title"><span class="t-yellow">PARRILLAS</span> <span class="t-red">MIXTAS</span></div>
+        <div class="section-desc">Acompañadas de papas fritas, ensalada y variedad de cremas</div>
+      </div>
+    </div>
+    <div class="cards-grid" id="grid-mixtas"></div>
+  </section>
+
+  <!-- ══ COMBOS PARRILLEROS ══ -->
+  <section class="section reveal" id="combos-parrilleros">
+    <div class="section-header">
+      <span class="section-icon">🔥</span>
+      <div>
+        <div class="section-title"><span class="t-yellow">COMBOS</span> <span class="t-red">PARRILLEROS</span></div>
+        <div class="section-desc">Acompañadas de papas fritas, ensalada y variedad de cremas</div>
+      </div>
+    </div>
+    <div class="cards-grid" id="grid-combos"></div>
+  </section>
+
+  <!-- ══ POLLO A LA BRASA ══ -->
+  <section class="section reveal" id="pollo-brasa">
+    <div class="section-header">
+      <span class="section-icon">🐔</span>
+      <div>
+        <div class="section-title"><span class="t-yellow">POLLO</span> <span class="t-red">A LA BRASA</span></div>
+        <div class="section-desc">Acompañado de papas fritas, ensalada y variedad de cremas</div>
+      </div>
+    </div>
+    <div class="cards-grid" id="grid-brasa"></div>
+  </section>
+
+  <!-- ══ COMBOS BRASA ══ -->
+  <section class="section reveal" id="combos-brasa">
+    <div class="section-header">
+      <span class="section-icon">🎯</span>
+      <div>
+        <div class="section-title"><span class="t-yellow">COMBOS</span> <span class="t-red">BRASA</span></div>
+        <div class="section-desc">Acompañados de papas fritas, ensalada y variedad de cremas</div>
+      </div>
+    </div>
+    <div class="cards-grid" id="grid-combosbrasa"></div>
+  </section>
+
+  <!-- ══ ALITAS ══ -->
+  <section class="section reveal" id="alitas">
+    <div class="section-header">
+      <span class="section-icon">🍗</span>
+      <div>
+        <div class="section-title one-word">ALITAS</div>
+        <div class="section-desc">Con papas regulares · Sabores: BBQ c/p · BBQ s/p · Broster · Acevichada · Anticuchera · Maracuyá · Picante</div>
+      </div>
+    </div>
+    <div class="cards-grid" id="grid-alitas"></div>
+    <div class="section-header" style="margin-top:30px;">
+      <span class="section-icon">🎯</span>
+      <div>
+        <div class="section-title"><span class="t-yellow">COMBOS</span> <span class="t-red">ALITAS</span></div>
+        <div class="section-desc">Sabores disponibles: BBQ c/p · BBQ s/p · Broster · Acevichada · Picante</div>
+      </div>
+    </div>
+    <div class="cards-grid" id="grid-combosalitas"></div>
+  </section>
+
+</main>
+
+<!-- FLOATING CART -->
+<button class="float-cart hidden" id="floatCart" onclick="toggleCart()">
+  🛒 Ver Pedido &nbsp;<span class="cart-badge" id="floatBadge" style="background:#fff;color:#e01c1c;">0</span>
+</button>
+
+<!-- CART OVERLAY -->
+<div class="cart-overlay" id="cartOverlay" onclick="toggleCart()"></div>
+
+<!-- CART PANEL -->
+<div class="cart-panel" id="cartPanel">
+  <div class="cart-head">
+    <span class="cart-title">🛒 MI PEDIDO</span>
+    <button class="cart-close" onclick="toggleCart()">✕</button>
+  </div>
+  <div class="cart-items" id="cartItems">
+    <div class="cart-empty">
+      <span class="empty-icon">🍽️</span>
+      <p style="font-family:'Oswald',sans-serif;color:#555;letter-spacing:1px;">Tu pedido está vacío</p>
+      <p style="font-size:12px;color:#444;margin-top:6px;">Agrega productos del menú</p>
+    </div>
+  </div>
+  <div class="cart-foot">
+    <div class="cart-total-row">
+      <span class="cart-total-label">SUBTOTAL</span>
+      <span class="cart-total-val">S/ <span id="cartTotal">0.00</span></span>
+    </div>
+    <div class="cart-delivery-note">
+      🛵 El costo de delivery se coordina por WhatsApp según tu ubicación en <strong>El Porvenir</strong>.<br>
+      💳 Pago: <strong>Yape</strong> o <strong>Efectivo</strong>
+    </div>
+    <button class="whatsapp-btn" id="waBtn" onclick="sendToWhatsApp()" disabled>
+      <svg class="wa-icon" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+        <path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413Z"/>
+      </svg>
+      ENVIAR PEDIDO POR WHATSAPP
+    </button>
+  </div>
+</div>
+
+<footer>
+  <div class="footer-logo"><span class="y">WALLPA</span> <span class="r">GRILL</span></div>
+  <p>🔥 Las mejores parrillas del Porvenir · Trujillo, Perú</p>
+  <p style="margin-top:6px;">📍 Cobertura de Delivery: Distrito El Porvenir · 💳 Yape / Efectivo</p>
+</footer>
+
+<script>
+// ══════════════════════════════════════════
+//  DATA – MENU
+// ══════════════════════════════════════════
+const WHATSAPP_NUMBER = '51999999999'; // ← Reemplaza con el número real
+
+const menu = {
+  personal: [
+    { id:'p1', name:'¼ de Pollo a la Parrilla (Pierna)', price:18, taper:1, tags:['Pollo','Pierna'], desc:'Pierna de pollo a la parrilla' },
+    { id:'p2', name:'¼ de Pollo a la Parrilla (Pecho)', price:20, taper:1, tags:['Pollo','Pecho'], desc:'Pecho de pollo a la parrilla' },
+    { id:'p3', name:'Porción de Mollejas (10 unid.)', price:20, taper:1, tags:['Pollo'], desc:'10 unidades de mollejas a la parrilla' },
+    { id:'p4', name:'Chuleta de Cerdo (300 gr.)', price:22, taper:1, tags:['Cerdo'], desc:'Chuleta de cerdo 300 gr.' },
+    { id:'p5', name:'Tira de Cerdo (400 gr.)', price:32, taper:1, tags:['Cerdo'], desc:'Tira de cerdo 400 gr.' },
+    { id:'p6', name:'Tira de Cerdo (900 gr.)', price:65, taper:2, tags:['Cerdo','Grande'], desc:'Tira de cerdo 900 gr. — ideal para compartir' },
+    { id:'p7', name:'Porción de Chorizo (3 unid.)', price:22, taper:1, tags:['Cerdo'], desc:'3 unidades de chorizo parrillero' },
+    { id:'p8', name:'Tira Mixta (½ res + ½ cerdo)', price:38, taper:1, tags:['Mixto'], desc:'½ tira de res y ½ tira de cerdo — precio referencial' },
+  ],
+  res: [
+    { id:'r1', name:'Churrasco (300 gr.)', price:23, taper:1, tags:['Res'] },
+    { id:'r2', name:'Tira de Res (400 gr.)', price:32, taper:1, tags:['Res'] },
+    { id:'r3', name:'Tira de Res (900 gr.)', price:65, taper:2, tags:['Res','Grande'] },
+    { id:'r4', name:'Cuadril (350 gr.)', price:35, taper:1, tags:['Res'] },
+    { id:'r5', name:'Bife (350 gr.)', price:35, taper:1, tags:['Res'] },
+    { id:'r6', name:'Maruchas (350 gr.)', price:35, taper:1, tags:['Res'] },
+    { id:'r7', name:'Anticuchos (3 palitos)', price:22, taper:1, tags:['Res'] },
+    { id:'r8', name:'Lomo Fino (350 gr.)', price:45, taper:1, tags:['Res','Premium'] },
+  ],
+  mixtas: [
+    { id:'m1', name:'Parrillón Mixto #1', price:45, taper:2, tags:['Mixto'], desc:'Pollo pierna + Chuleta + Chorizo', combo:true },
+    { id:'m2', name:'Parrillón Mixto #2', price:46, taper:2, tags:['Mixto'], desc:'Pollo pecho + Churrasco + Chorizo', combo:true },
+    { id:'m3', name:'Parrillón Mixto #3', price:47, taper:2, tags:['Mixto'], desc:'Chuleta + Churrasco + Chorizo', combo:true },
+    { id:'m4', name:'Parrillón Doble Tira', price:38, taper:1, tags:['Mixto'], desc:'Tira de cerdo (250 gr.) + Tira de res (250 gr.)', combo:true },
+  ],
+  combos: [
+    { id:'c1', name:'Dúo Parrillero A', price:36, taper:1, tags:['Dúo'], desc:'¼ Pollo pierna + 1 Chuleta de cerdo (300 gr.)', combo:true },
+    { id:'c2', name:'Dúo Parrillero B', price:37, taper:1, tags:['Dúo'], desc:'¼ Pollo pecho + 1 Chuleta de cerdo (300 gr.)', combo:true },
+    { id:'c3', name:'Dúo Parrillero C', price:39, taper:1, tags:['Dúo'], desc:'¼ Pollo pecho + 1 Churrasco (300 gr.)', combo:true },
+    { id:'c4', name:'Mix Brasas y Carbón', price:36, taper:2, tags:['Mix'], desc:'¼ Pollo a la brasa + 1 Chuleta de cerdo (300 gr.)', combo:true },
+    { id:'c5', name:'Combo Wallpa Grill', price:55, taper:1, tags:['3 personas'], desc:'¼ Pollo parrilla (pierna) + ¼ Pollo brasa + 1 Chuleta (300 gr.) + 1 Chorizo', combo:true, persons:'3 personas' },
+    { id:'c6', name:'Parrillón Bravo', price:69, taper:3, tags:['4 personas'], desc:'¼ Pierna parrilla + ¼ Pollo brasa + 1 Chuleta (300 gr.) + 1 Churrasco (300 gr.) + 1 Chorizo', combo:true, persons:'4 personas' },
+    { id:'c7', name:'Parrilloncito', price:62, taper:3, tags:['3 personas'], desc:'¼ Pollo pierna + 1 Chuleta (350 gr.) + 3 Chorizo + 3 Anticuchos', combo:true, persons:'3 personas' },
+    { id:'c8', name:'Parrillón', price:85, taper:3, tags:['4-5 personas'], desc:'1 Chuleta (350 gr.) + 1 Churrasco (350 gr.) + ¼ Pollo pierna + 3 Chorizo + 3 Anticuchos', combo:true, persons:'4-5 personas' },
+    { id:'c9', name:'Parrillón Especial', price:120, taper:4, tags:['6 personas'], desc:'Tira cerdo 400 gr. + Chuleta + Churrasco + ¼ Pollo + 3 Chorizo + 3 Anticuchos + Mollejas', combo:true, persons:'6 personas' },
+    { id:'c10', name:'Parrillón Especial de la Casa', price:180, taper:4, tags:['8-10 personas'], desc:'Tira cerdo + 2 Chuletas + 2 Churrascos + 2 Pollos + 3 Chorizo + 3 Anticuchos + Mollejas', combo:true, persons:'8-10 personas' },
+  ],
+  brasa: [
+    { id:'b1', name:'⅛ de Pollo a la Brasa', price:11, taper:1, tags:['Brasa'] },
+    { id:'b2', name:'¼ de Pollo a la Brasa', price:18, taper:1, tags:['Brasa'] },
+    { id:'b3', name:'½ de Pollo a la Brasa', price:35, taper:2, tags:['Brasa'] },
+    { id:'b4', name:'1 Pollo a la Brasa Entero', price:60, taper:3, tags:['Brasa','Familiar'] },
+    { id:'b5', name:'1 Pollo + Pepsi 1.5 Lt.', price:63, taper:3, tags:['Brasa','Promo'] },
+    { id:'b6', name:'⅛ de Broaster', price:15, taper:1, tags:['Broaster'] },
+    { id:'b7', name:'¼ de Broaster', price:20, taper:1, tags:['Broaster'] },
+    { id:'b8', name:'⅛ de Mostrito', price:12, taper:1, tags:['Mostrito'] },
+    { id:'b9', name:'¼ de Mostrito', price:20, taper:1, tags:['Mostrito'] },
+    { id:'b10', name:'Arroz Chaufa de Pollo', price:15, taper:1, tags:['Extra'] },
+  ],
+  combosbrasa: [
+    { id:'cb1', name:'Brasitas', price:17, taper:1, tags:['1 persona'], desc:'⅛ Brasa + Arroz chaufa + Papas fritas + Ensalada + Gaseosa 300 ml', combo:true },
+    { id:'cb2', name:'Brasas Soltero', price:22, taper:1, tags:['1 persona'], desc:'¼ Brasa + Arroz chaufa + Papas fritas + Ensalada + Gaseosa 300 ml', combo:true },
+    { id:'cb3', name:'Brasas Mediana', price:42, taper:2, tags:['2 personas'], desc:'½ Brasa + Arroz chaufa + Papas fritas + Ensalada + Gaseosa 500 ml', combo:true },
+    { id:'cb4', name:'Brasas Familiar', price:75, taper:3, tags:['4 personas'], desc:'1 Pollo entero + Arroz chaufa + Papas fritas + Ensalada + Pepsi 1.5 Lt.', combo:true },
+    { id:'cb5', name:'Mega Combo', price:68, taper:3, tags:['Familiar'], desc:'1 Pollo entero + Arroz chaufa + Papas fritas + Ensalada + Pepsi 1.5 Lt.', combo:true },
+  ],
+  alitas: [
+    { id:'a1', name:'6 Piezas + Papa Regular', price:17, taper:1, tags:['6 piezas'], flavors:1 },
+    { id:'a2', name:'10 Piezas + Papa Regular', price:29, taper:1, tags:['10 piezas'], flavors:2 },
+    { id:'a3', name:'15 Piezas + Papa Regular', price:40, taper:2, tags:['15 piezas'], flavors:3 },
+    { id:'a4', name:'20 Piezas + Papa Regular', price:55, taper:2, tags:['20 piezas'], flavors:4 },
+    { id:'a5', name:'30 Piezas + Papa + Ensalada', price:78, taper:2, tags:['30 piezas'], flavors:5 },
+    { id:'a6', name:'40 Piezas + Papa + Ensalada', price:105, taper:3, tags:['40 piezas'], flavors:8 },
+  ],
+  combosalitas: [
+    { id:'ca1', name:'Alitas Peruchas', price:18, taper:1, tags:['5 piezas'], desc:'5 piezas + Arroz chaufa + Papas fritas + Ensalada', flavors:1, combo:true },
+    { id:'ca2', name:'Alitas Chauferas', price:35, taper:2, tags:['10 piezas'], desc:'10 piezas + Arroz chaufa + Papas fritas + Ensalada + 2 Gaseosas 355 ml', flavors:1, combo:true },
+  ],
+};
+
+const FLAVORS = ['BBQ c/p','BBQ s/p','Broster','Acevichada c/p','Acevichada s/p','Anticuchera','Maracuyá','Picante'];
+const FLAVORS_COMBOS = ['BBQ c/p','BBQ s/p','Broster','Acevichada c/p','Acevichada s/p','Picante'];
+
+// ══════════════════════════════════════════
+//  CART STATE
+// ══════════════════════════════════════════
+let cart = [];
+let itemCounter = 0;
+
+// ══════════════════════════════════════════
+//  RENDER CARD
+// ══════════════════════════════════════════
+function renderCard(item, flavorsPool) {
+  const hasFlavors = item.flavors > 0;
+  const flavorCount = item.flavors || 0;
+  const pool = flavorsPool || FLAVORS;
+
+  const tagsHtml = item.tags.map(t => {
+    const isPersons = t.includes('personas') || t.includes('persona') || t.includes('piezas');
+    return `<span class="tag ${isPersons ? 'red' : ''}">${t}</span>`;
+  }).join('');
+
+  const flavorHtml = hasFlavors ? `
+    <div style="margin-top:10px;">
+      <div style="font-size:11px;color:#888;font-family:'Oswald',sans-serif;letter-spacing:1px;margin-bottom:6px;">ELIGE ${flavorCount} SABOR${flavorCount > 1 ? 'ES' : ''}:</div>
+      <div class="flavor-group" id="fl-${item.id}">
+        ${pool.map(f => `<button class="flavor-btn" onclick="toggleFlavor('${item.id}',this,'${f}',${flavorCount})">${f}</button>`).join('')}
+      </div>
+    </div>` : '';
+
+  const personsHtml = item.persons ? `<div style="font-size:11px;color:#e01c1c;font-family:'Oswald',sans-serif;letter-spacing:1px;margin-top:6px;">👥 ${item.persons}</div>` : '';
+
+  return `
+  <div class="card ${item.combo ? 'combo' : ''}" id="card-${item.id}">
+    ${item.combo ? '<span class="combo-badge">COMBO</span>' : ''}
+    <div class="card-top">
+      <div class="card-name">${item.name}</div>
+      <div class="card-price">S/ ${item.price}<span> /unid.</span></div>
+    </div>
+    ${item.desc ? `<div class="card-desc">${item.desc}</div>` : ''}
+    ${personsHtml}
+    <div class="card-tags" style="margin-top:8px;">${tagsHtml}</div>
+    ${flavorHtml}
+    <div class="card-taper">📦 Incluye ${item.taper} taper${item.taper > 1 ? 's' : ''}</div>
+    <button class="card-btn" id="btn-${item.id}" onclick="addToCart('${item.id}')">+ Agregar al pedido</button>
+  </div>`;
+}
+
+// ══════════════════════════════════════════
+//  FLAVORS TOGGLE
+// ══════════════════════════════════════════
+function toggleFlavor(itemId, btn, flavor, maxCount) {
+  const group = document.getElementById(`fl-${itemId}`);
+  const selected = group.querySelectorAll('.flavor-btn.selected');
+
+  if (btn.classList.contains('selected')) {
+    btn.classList.remove('selected');
+    return;
+  }
+
+  if (selected.length >= maxCount) {
+    // deselect first
+    selected[0].classList.remove('selected');
+  }
+  btn.classList.add('selected');
+}
+
+function getSelectedFlavors(itemId) {
+  const group = document.getElementById(`fl-${itemId}`);
+  if (!group) return [];
+  return [...group.querySelectorAll('.flavor-btn.selected')].map(b => b.textContent);
+}
+
+// ══════════════════════════════════════════
+//  ADD TO CART
+// ══════════════════════════════════════════
+function addToCart(itemId) {
+  const allItems = Object.values(menu).flat();
+  const item = allItems.find(i => i.id === itemId);
+  if (!item) return;
+
+  const flavors = getSelectedFlavors(itemId);
+
+  itemCounter++;
+  cart.push({
+    uid: itemCounter,
+    id: item.id,
+    name: item.name,
+    price: item.price,
+    flavors: flavors,
+  });
+
+  // feedback
+  const btn = document.getElementById(`btn-${itemId}`);
+  btn.textContent = '✔ Agregado';
+  btn.classList.add('added');
+  setTimeout(() => {
+    btn.textContent = '+ Agregar al pedido';
+    btn.classList.remove('added');
+  }, 1500);
+
+  updateCartUI();
+}
+
+// ══════════════════════════════════════════
+//  REMOVE FROM CART
+// ══════════════════════════════════════════
+function removeFromCart(uid) {
+  cart = cart.filter(i => i.uid !== uid);
+  updateCartUI();
+}
+
+// ══════════════════════════════════════════
+//  UPDATE CART UI
+// ══════════════════════════════════════════
+function updateCartUI() {
+  const total = cart.reduce((s, i) => s + i.price, 0);
+  const count = cart.length;
+
+  document.getElementById('badge').textContent = count;
+  document.getElementById('floatBadge').textContent = count;
+  document.getElementById('cartTotal').textContent = total.toFixed(2);
+
+  const waBtn = document.getElementById('waBtn');
+  waBtn.disabled = count === 0;
+
+  const floatCart = document.getElementById('floatCart');
+  floatCart.classList.toggle('hidden', count === 0);
+
+  const container = document.getElementById('cartItems');
+  if (count === 0) {
+    container.innerHTML = `
+      <div class="cart-empty">
+        <span class="empty-icon">🍽️</span>
+        <p style="font-family:'Oswald',sans-serif;color:#555;letter-spacing:1px;">Tu pedido está vacío</p>
+        <p style="font-size:12px;color:#444;margin-top:6px;">Agrega productos del menú</p>
+      </div>`;
+    return;
+  }
+
+  container.innerHTML = cart.map(i => `
+    <div class="cart-item">
+      <div class="ci-info">
+        <div class="ci-name">${i.name}</div>
+        ${i.flavors.length ? `<div class="ci-flavor">🌶 ${i.flavors.join(', ')}</div>` : ''}
+      </div>
+      <div style="display:flex;align-items:center;gap:8px;">
+        <div class="ci-price">S/${i.price}</div>
+        <button class="ci-remove" onclick="removeFromCart(${i.uid})">✕</button>
+      </div>
+    </div>`).join('');
+}
+
+// ══════════════════════════════════════════
+//  WHATSAPP SEND
+// ══════════════════════════════════════════
+function sendToWhatsApp() {
+  if (cart.length === 0) return;
+
+  const total = cart.reduce((s, i) => s + i.price, 0);
+  let msg = '🔥 *WALLPA GRILL – PEDIDO*\n';
+  msg += '━━━━━━━━━━━━━━━━━━━━\n';
+
+  cart.forEach((item, idx) => {
+    msg += `\n${idx + 1}. *${item.name}*`;
+    if (item.flavors.length) msg += `\n   🌶 Sabor(es): ${item.flavors.join(', ')}`;
+    msg += `\n   💰 S/ ${item.price}`;
+  });
+
+  msg += '\n\n━━━━━━━━━━━━━━━━━━━━';
+  msg += `\n💵 *SUBTOTAL: S/ ${total.toFixed(2)}*`;
+  msg += '\n🛵 *+ Delivery según distancia en El Porvenir*';
+  msg += '\n💳 *Pago: Yape o Efectivo*';
+  msg += '\n\n📍 Por favor, indícame tu dirección en El Porvenir para coordinar el delivery.';
+
+  const encoded = encodeURIComponent(msg);
+  const url = `https://wa.me/${WHATSAPP_NUMBER}?text=${encoded}`;
+  window.open(url, '_blank');
+}
+
+// ══════════════════════════════════════════
+//  TOGGLE CART PANEL
+// ══════════════════════════════════════════
+function toggleCart() {
+  const panel = document.getElementById('cartPanel');
+  const overlay = document.getElementById('cartOverlay');
+  const isOpen = panel.classList.contains('open');
+  panel.classList.toggle('open', !isOpen);
+  overlay.classList.toggle('open', !isOpen);
+  document.body.style.overflow = isOpen ? '' : 'hidden';
+}
+
+// ══════════════════════════════════════════
+//  NAV TABS SCROLL
+// ══════════════════════════════════════════
+function scrollToSection(id, tabEl) {
+  document.querySelectorAll('.nav-tab').forEach(t => t.classList.remove('active'));
+  tabEl.classList.add('active');
+  const el = document.getElementById(id);
+  if (el) {
+    const offset = 130;
+    const top = el.getBoundingClientRect().top + window.scrollY - offset;
+    window.scrollTo({ top, behavior: 'smooth' });
+  }
+}
+
+// ══════════════════════════════════════════
+//  RENDER ALL GRIDS
+// ══════════════════════════════════════════
+function renderGrid(gridId, items, flavorsPool) {
+  const el = document.getElementById(gridId);
+  if (!el) return;
+  el.innerHTML = items.map(i => renderCard(i, flavorsPool)).join('');
+}
+
+renderGrid('grid-personal', menu.personal);
+renderGrid('grid-res', menu.res);
+renderGrid('grid-mixtas', menu.mixtas);
+renderGrid('grid-combos', menu.combos);
+renderGrid('grid-brasa', menu.brasa);
+renderGrid('grid-combosbrasa', menu.combosbrasa);
+renderGrid('grid-alitas', menu.alitas, FLAVORS);
+renderGrid('grid-combosalitas', menu.combosalitas, FLAVORS_COMBOS);
+
+// ══════════════════════════════════════════
+//  SCROLL REVEAL
+// ══════════════════════════════════════════
+const observer = new IntersectionObserver(entries => {
+  entries.forEach(e => {
+    if (e.isIntersecting) { e.target.classList.add('visible'); observer.unobserve(e.target); }
+  });
+}, { threshold: 0.08 });
+
+document.querySelectorAll('.reveal').forEach(el => observer.observe(el));
+
+// ══════════════════════════════════════════
+//  ACTIVE TAB ON SCROLL
+// ══════════════════════════════════════════
+const sectionIds = ['parrillas-personales','res-parrilla','mixtas','combos-parrilleros','pollo-brasa','combos-brasa','alitas'];
+const tabs = document.querySelectorAll('.nav-tab');
+
+window.addEventListener('scroll', () => {
+  let current = '';
+  sectionIds.forEach(id => {
+    const el = document.getElementById(id);
+    if (el && el.getBoundingClientRect().top <= 140) current = id;
+  });
+
+  const map = {
+    'parrillas-personales': 0,
+    'res-parrilla': 1,
+    'mixtas': 2,
+    'combos-parrilleros': 3,
+    'pollo-brasa': 4,
+    'combos-brasa': 5,
+    'alitas': 6,
+  };
+
+  if (current && map[current] !== undefined) {
+    tabs.forEach((t, i) => t.classList.toggle('active', i === map[current]));
+    // scroll tab into view
+    tabs[map[current]].scrollIntoView({ behavior: 'smooth', block: 'nearest', inline: 'center' });
+  }
+}, { passive: true });
+</script>
+</body>
+</html>
